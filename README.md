@@ -1,290 +1,94 @@
-Welcome to your new TanStack app! 
+# Solidroad Landing Page Recreation (TanStack Start)
 
-# Getting Started
+<div align="center">
+  <img src="public/hero.jpg" alt="Project Hero Banner" width="100%" />
+</div>
 
-To run this application:
+---
 
-```bash
-npm install
-npm run dev
-```
+## 📋 Project Overview
 
-# Building For Production
+This project is a frontend assessment submission that recreates the **Hero** and **Footer** sections of the Solidroad website.
 
-To build this application for production:
+Built strictly using **TanStack Start** and **Shadcn UI**, this project demonstrates modern full-stack React capabilities, responsive design, and creative adaptation. Per the **"Creative Freedom"** requirement, this implementation features a **custom Dark Mode / Cyberpunk Green aesthetic** rather than a pixel-perfect copy of the original light theme.
 
-```bash
-npm run build
-```
+**🔗 Repository Link:** [https://github.com/bolla-geethika/full-stack-assessment](https://github.com/bolla-geethika/full-stack-assessment)
 
-## Testing
+---
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+## 🚀 Tech Stack
 
-```bash
-npm run test
-```
+| Component | Technology | Description |
+| :--- | :--- | :--- |
+| **Framework** | [TanStack Start](https://tanstack.com/start/latest) | File-based routing, SSR, and modern React patterns |
+| **UI Library** | [Shadcn UI](https://ui.shadcn.com/) | Accessible components based on Radix Primitives |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | Utility-first CSS framework for responsive design |
+| **Language** | [TypeScript](https://www.typescriptlang.org/) | Strongly typed JavaScript for code reliability |
+| **Icons** | [Lucide React](https://lucide.dev/) | Clean, consistent SVG icons |
 
-## Styling
+---
 
-This project uses CSS for styling.
+## 🛠️ Setup Instructions
 
+Follow these steps to run the project locally on your machine.
 
+1.  **Clone the repository**
+    ```bash
+    git clone [https://github.com/bolla-geethika/full-stack-assessment.git](https://github.com/bolla-geethika/full-stack-assessment.git)
+    cd full-stack-assessment
+    ```
 
+2.  **Install dependencies**
+    *Note: This project uses `package.json` for dependency management.*
+    ```bash
+    npm install
+    ```
 
-## Routing
-This project uses [TanStack Router](https://tanstack.com/router). The initial setup is a file based router. Which means that the routes are managed as files in `src/routes`.
+3.  **Run the development server**
+    ```bash
+    npm run dev
+    ```
 
-### Adding A Route
+4.  **View the application**
+    Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-To add a new route to your application just add another a new file in the `./src/routes` directory.
+---
 
-TanStack will automatically generate the content of the route file for you.
+## 📸 Screenshots
 
-Now that you have two routes you can use a `Link` component to navigate between them.
+### Hero Section
+*A high-impact landing area featuring a modern dark theme with vivid green accents, responsive typography, and functional CTA buttons.*
 
-### Adding Links
+<img src="public/hero.jpg" alt="Hero Section Screenshot" width="800" />
 
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
+### Footer Section
+*A fully responsive 4-column footer with branding, social links, and organized navigation.*
 
-```tsx
-import { Link } from "@tanstack/react-router";
-```
+<img src="public/footer.png" alt="Footer Section Screenshot" width="800" />
 
-Then anywhere in your JSX you can use it like so:
+---
 
-```tsx
-<Link to="/about">About</Link>
-```
+## ✨ Key Features & Creative Interpretation
 
-This will create a link that will navigate to the `/about` route.
+In compliance with the assessment's "Creative Freedom" clause, the following enhancements were implemented:
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
+* 🎨 **Dark Mode Theme:** Switched from the original light theme to a **"Cyber-Green" palette** (Dark Background + Emerald Accents) to demonstrate design sensibility.
+* 🖱️ **Interactive Elements:** Added hover states (`hover:scale-105`), smooth transitions, and micro-interactions to all buttons and links.
+* 📱 **Responsive Layout:** Implemented a mobile-first approach using Tailwind Grid and Flexbox, ensuring perfect rendering on Mobile, Tablet, and Desktop.
+* 🧩 **Semantic Structure:** Code is organized into modular, reusable components (`Hero.tsx`, `Footer.tsx`) within the `src/components/ui` directory.
 
-### Using A Layout
+---
 
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you use the `<Outlet />` component.
+## 📂 Project Structure
 
-Here is an example layout that includes a header:
-
-```tsx
-import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
-
-import { Link } from "@tanstack/react-router";
-
-export const Route = createRootRoute({
-  component: () => (
-    <>
-      <header>
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
-})
-```
-
-The `<TanStackRouterDevtools />` component is not required so you can remove it if you don't want it in your layout.
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-const peopleRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: "/people",
-  loader: async () => {
-    const response = await fetch("https://swapi.dev/api/people");
-    return response.json() as Promise<{
-      results: {
-        name: string;
-      }[];
-    }>;
-  },
-  component: () => {
-    const data = peopleRoute.useLoaderData();
-    return (
-      <ul>
-        {data.results.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    );
-  },
-});
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-### React-Query
-
-React-Query is an excellent addition or alternative to route loading and integrating it into you application is a breeze.
-
-First add your dependencies:
-
-```bash
-npm install @tanstack/react-query @tanstack/react-query-devtools
-```
-
-Next we'll need to create a query client and provider. We recommend putting those in `main.tsx`.
-
-```tsx
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// ...
-
-const queryClient = new QueryClient();
-
-// ...
-
-if (!rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-
-  root.render(
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-    </QueryClientProvider>
-  );
-}
-```
-
-You can also add TanStack Query Devtools to the root route (optional).
-
-```tsx
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-
-const rootRoute = createRootRoute({
-  component: () => (
-    <>
-      <Outlet />
-      <ReactQueryDevtools buttonPosition="top-right" />
-      <TanStackRouterDevtools />
-    </>
-  ),
-});
-```
-
-Now you can use `useQuery` to fetch your data.
-
-```tsx
-import { useQuery } from "@tanstack/react-query";
-
-import "./App.css";
-
-function App() {
-  const { data } = useQuery({
-    queryKey: ["people"],
-    queryFn: () =>
-      fetch("https://swapi.dev/api/people")
-        .then((res) => res.json())
-        .then((data) => data.results as { name: string }[]),
-    initialData: [],
-  });
-
-  return (
-    <div>
-      <ul>
-        {data.map((person) => (
-          <li key={person.name}>{person.name}</li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default App;
-```
-
-You can find out everything you need to know on how to use React-Query in the [React-Query documentation](https://tanstack.com/query/latest/docs/framework/react/overview).
-
-## State Management
-
-Another common requirement for React applications is state management. There are many options for state management in React. TanStack Store provides a great starting point for your project.
-
-First you need to add TanStack Store as a dependency:
-
-```bash
-npm install @tanstack/store
-```
-
-Now let's create a simple counter in the `src/App.tsx` file as a demonstration.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-function App() {
-  const count = useStore(countStore);
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-    </div>
-  );
-}
-
-export default App;
-```
-
-One of the many nice features of TanStack Store is the ability to derive state from other state. That derived state will update when the base state updates.
-
-Let's check this out by doubling the count using derived state.
-
-```tsx
-import { useStore } from "@tanstack/react-store";
-import { Store, Derived } from "@tanstack/store";
-import "./App.css";
-
-const countStore = new Store(0);
-
-const doubledStore = new Derived({
-  fn: () => countStore.state * 2,
-  deps: [countStore],
-});
-doubledStore.mount();
-
-function App() {
-  const count = useStore(countStore);
-  const doubledCount = useStore(doubledStore);
-
-  return (
-    <div>
-      <button onClick={() => countStore.setState((n) => n + 1)}>
-        Increment - {count}
-      </button>
-      <div>Doubled - {doubledCount}</div>
-    </div>
-  );
-}
-
-export default App;
-```
-
-We use the `Derived` class to create a new store that is derived from another store. The `Derived` class has a `mount` method that will start the derived store updating.
-
-Once we've created the derived store we can use it in the `App` component just like we would any other store using the `useStore` hook.
-
-You can find out everything you need to know on how to use TanStack Store in the [TanStack Store documentation](https://tanstack.com/store/latest).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+```text
+src/
+├── components/
+│   └── ui/          # Reusable Shadcn components & Page Sections
+│       ├── button.tsx
+│       ├── Hero.tsx
+│       └── Footer.tsx
+├── routes/
+│   └── index.tsx    # Main Homepage Route
+├── styles.css       # Global Tailwind Directives
+└── main.tsx         # Application Entry Point
